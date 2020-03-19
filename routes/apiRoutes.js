@@ -15,11 +15,13 @@ module.exports = function(app){
         
     app.post("/api/notes", (req, res) => {
 
-        db.push(req.body);
+        let notes = db;
+        newNote = req.body;
+        notes.push(newNote);
         
         fs.writeFile("./db/db.json", JSON.stringify(db, null, 2), err =>{
             if (err) throw err;
-            res.json(db);
+            res.json(notes);
             });
     });   
        
